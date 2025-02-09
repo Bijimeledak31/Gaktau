@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <meta name="description" content="POS - Bootstrap Admin Template">
+    <title>Warehouse Management System</title>
+    
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.jpg">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="assets/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div id="global-loader">
+        <div class="whirly-loader"> </div>
+    </div>
+
+    <div class="main-wrapper">
+        <!-- Header & Sidebar code remains same -->
+
+        <div class="page-wrapper">
+            <div class="content">
+                <div class="page-header">
+                    <div class="page-title">
+                        <h4>Inventory Management</h4>
+                        <h6>Manage your inventory items</h6>
+                    </div>
+                    <div class="page-btn">
+                        <a href="#" class="btn btn-added" data-bs-toggle="modal" data-bs-target="#addItemModal">
+                            <img src="assets/img/icons/plus.svg" alt="img"> Add New Item
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Search and Filter Section -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-3 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label>Item Code</label>
+                                    <div class="input-groupicon">
+                                        <input type="text" placeholder="Scan barcode or enter code">
+                                        <button class="btn btn-sm btn-primary scanner-set">
+                                            <img src="assets/img/icons/scanner.svg" alt="img" width="22">
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label>Category</label>
+                                    <select class="select">
+                                        <option>All Categories</option>
+                                        <option>Electronics</option>
+                                        <option>Raw Materials</option>
+                                        <option>Finished Goods</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label>Stock Status</label>
+                                    <select class="select">
+                                        <option>All Status</option>
+                                        <option>Low Stock</option>
+                                        <option>Out of Stock</option>
+                                        <option>In Stock</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label>Location</label>
+                                    <select class="select">
+                                        <option>All Locations</option>
+                                        <option>Room A</option>
+                                        <option>Room B</option>
+                                        <option>Room C</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item List Table -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table datanew">
+                                <thead>
+                                    <tr>
+                                        <th>Item Code</th>
+                                        <th>Item Name</th>
+                                        <th>Category</th>
+                                        <th>Location</th>
+                                        <th>Stock Level</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>IT001</td>
+                                        <td class="productimgname">
+                                            <a href="#">Laptop Dell XPS 13</a>
+                                        </td>
+                                        <td>Electronics</td>
+                                        <td>Room A - Rack 1 - Level 2</td>
+                                        <td>24</td>
+                                        <td><span class="badges bg-lightgreen">In Stock</span></td>
+                                        <td>
+                                            <a class="me-3" href="#" data-bs-toggle="modal" data-bs-target="#editItemModal">
+                                                <img src="assets/img/icons/edit.svg" alt="img">
+                                            </a>
+                                            <a class="me-3" href="#" data-bs-toggle="modal" data-bs-target="#viewItemModal">
+                                                <img src="assets/img/icons/eye.svg" alt="img">
+                                            </a>
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#deleteItemModal">
+                                                <img src="assets/img/icons/delete.svg" alt="img">
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Item Modal -->
+    <div class="modal fade" id="addItemModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New Item</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Item Name <span class="manitory">*</span></label>
+                                <input type="text" class="form-control" placeholder="Enter item name">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Category <span class="manitory">*</span></label>
+                                <select class="select">
+                                    <option>Choose Category</option>
+                                    <option>Electronics</option>
+                                    <option>Raw Materials</option>
+                                    <option>Finished Goods</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Location <span class="manitory">*</span></label>
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <select class="select">
+                                            <option>Room</option>
+                                            <option>Room A</option>
+                                            <option>Room B</option>
+                                            <option>Room C</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <select class="select">
+                                            <option>Rack</option>
+                                            <option>Rack 1</option>
+                                            <option>Rack 2</option>
+                                            <option>Rack 3</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <select class="select">
+                                            <option>Level</option>
+                                            <option>Level 1</option>
+                                            <option>Level 2</option>
+                                            <option>Level 3</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Initial Stock <span class="manitory">*</span></label>
+                                <input type="number" class="form-control" placeholder="Enter initial stock">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Minimum Stock Level <span class="manitory">*</span></label>
+                                <input type="number" class="form-control" placeholder="Enter minimum stock level">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Barcode</label>
+                                <div class="input-groupicon">
+                                    <input type="text" placeholder="Scan barcode or enter manually">
+                                    <button class="btn btn-sm btn-primary scanner-set">
+                                        <img src="assets/img/icons/scanner.svg" alt="img" width="22">
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea class="form-control" placeholder="Enter item description"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-submit">Save Item</button>
+                    <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Required Scripts -->
+    <script src="assets/js/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/feather.min.js"></script>
+    <script src="assets/js/jquery.slimscroll.min.js"></script>
+    <script src="assets/js/jquery.dataTables.min.js"></script>
+    <script src="assets/js/dataTables.bootstrap4.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/script.js"></script>
+    
+    <!-- Custom Scripts -->
+    <script>
+        // Barcode scanner functionality
+        $('.scanner-set').on('click', function() {
+            // Initialize barcode scanner
+            alert('Barcode scanner activated - Hardware integration required');
+        });
+
+        // Stock level monitoring 
+        function checkStockLevels() {
+            // Check stock levels against minimum thresholds
+            // Trigger alerts for low stock
+        }
+
+        // Location validation
+        function validateLocation(room, rack, level) {
+            // Validate if location exists and is available
+        }
+
+        // Initialize features
+        $(document).ready(function() {
+            $('.datanew').DataTable({
+                "order": [[4, "desc"]] // Sort by stock level
+            });
+
+            // Monitor stock levels hourly
+            setInterval(checkStockLevels, 3600000);
+        });
+    </script>
+</body>
+</html>

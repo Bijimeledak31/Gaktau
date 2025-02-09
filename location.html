@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <meta name="description" content="Warehouse Management System">
+    <title>Location Management</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.jpg">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="assets/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div id="global-loader">
+        <div class="whirly-loader"></div>
+    </div>
+
+    <div class="main-wrapper">
+        <!-- Header & Sidebar code remains same -->
+
+        <div class="page-wrapper">
+            <div class="content">
+                <div class="page-header">
+                    <div class="page-title">
+                        <h4>Location Management</h4>
+                        <h6>Manage your warehouse locations</h6>
+                    </div>
+                    <div class="page-btn">
+                        <a href="#" class="btn btn-added" data-bs-toggle="modal" data-bs-target="#addLocationModal">
+                            <img src="assets/img/icons/plus.svg" alt="img">Add Location
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Location Overview -->
+                <div class="row">
+                    <div class="col-lg-3 col-sm-6 col-12">
+                        <div class="dash-widget">
+                            <div class="dash-widgetcontent">
+                                <h5 id="totalRooms">4</h5>
+                                <h6>Total Rooms</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 col-12">
+                        <div class="dash-widget dash1">
+                            <div class="dash-widgetcontent">
+                                <h5 id="totalRacks">12</h5>
+                                <h6>Total Racks</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 col-12">
+                        <div class="dash-widget dash2">
+                            <div class="dash-widgetcontent">
+                                <h5 id="totalLevels">36</h5>
+                                <h6>Total Levels</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 col-12">
+                        <div class="dash-widget dash3">
+                            <div class="dash-widgetcontent">
+                                <h5 id="occupancyRate">75%</h5>
+                                <h6>Occupancy Rate</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Location Management Tabs -->
+                <div class="card">
+                    <div class="card-body">
+                        <ul class="nav nav-tabs nav-tabs-solid">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-bs-toggle="tab" href="#roomTab">Rooms</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-bs-toggle="tab" href="#rackTab">Racks</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-bs-toggle="tab" href="#levelTab">Levels</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <!-- Rooms Tab -->
+                            <div class="tab-pane show active" id="roomTab">
+                                <div class="table-responsive">
+                                    <table class="table datanew">
+                                        <thead>
+                                            <tr>
+                                                <th>Room ID</th>
+                                                <th>Room Name</th>
+                                                <th>Total Racks</th>
+                                                <th>Total Capacity</th>
+                                                <th>Used Capacity</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>RM001</td>
+                                                <td>Room A</td>
+                                                <td>4</td>
+                                                <td>48 items</td>
+                                                <td>36 items</td>
+                                                <td><span class="badges bg-lightgreen">Active</span></td>
+                                                <td>
+                                                    <a class="me-3" href="#" data-bs-toggle="modal" data-bs-target="#editRoomModal">
+                                                        <img src="assets/img/icons/edit.svg" alt="Edit">
+                                                    </a>
+                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#viewRoomModal">
+                                                        <img src="assets/img/icons/eye.svg" alt="View">
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!-- Racks Tab -->
+                            <div class="tab-pane" id="rackTab">
+                                <div class="table-responsive">
+                                    <table class="table datanew">
+                                        <thead>
+                                            <tr>
+                                                <th>Rack ID</th>
+                                                <th>Room</th>
+                                                <th>Rack Name</th>
+                                                <th>Total Levels</th>
+                                                <th>Total Capacity</th>
+                                                <th>Used Capacity</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>RK001</td>
+                                                <td>Room A</td>
+                                                <td>Rack 1</td>
+                                                <td>3</td>
+                                                <td>12 items</td>
+                                                <td>8 items</td>
+                                                <td><span class="badges bg-lightgreen">Active</span></td>
+                                                <td>
+                                                    <a class="me-3" href="#" data-bs-toggle="modal" data-bs-target="#editRackModal">
+                                                        <img src="assets/img/icons/edit.svg" alt="Edit">
+                                                    </a>
+                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#viewRackModal">
+                                                        <img src="assets/img/icons/eye.svg" alt="View">
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!-- Levels Tab -->
+                            <div class="tab-pane" id="levelTab">
+                                <div class="table-responsive">
+                                    <table class="table datanew">
+                                        <thead>
+                                            <tr>
+                                                <th>Level ID</th>
+                                                <th>Room</th>
+                                                <th>Rack</th>
+                                                <th>Level Name</th>
+                                                <th>Capacity</th>
+                                                <th>Used Space</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>LV001</td>
+                                                <td>Room A</td>
+                                                <td>Rack 1</td>
+                                                <td>Level 1</td>
+                                                <td>4 items</td>
+                                                <td>3 items</td>
+                                                <td><span class="badges bg-lightgreen">Active</span></td>
+                                                <td>
+                                                    <a class="me-3" href="#" data-bs-toggle="modal" data-bs-target="#editLevelModal">
+                                                        <img src="assets/img/icons/edit.svg" alt="Edit">
+                                                    </a>
+                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#viewLevelModal">
+                                                        <img src="assets/img/icons/eye.svg" alt="View">
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Location Modal -->
+    <div class="modal fade" id="addLocationModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New Location</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Location Type <span class="manitory">*</span></label>
+                        <select class="select" id="locationType">
+                            <option value="">Select Type</option>
+                            <option value="room">Room</option>
+                            <option value="rack">Rack</option>
+                            <option value="level">Level</option>
+                        </select>
+                    </div>
+
+                    <!-- Dynamic Fields -->
+                    <div id="roomFields" style="display: none;">
+                        <div class="form-group">
+                            <label>Room Name <span class="manitory">*</span></label>
+                            <input type="text" class="form-control" placeholder="Enter room name">
+                        </div>
+                        <div class="form-group">
+                            <label>Capacity <span class="manitory">*</span></label>
+                            <input type="number" class="form-control" placeholder="Enter room capacity">
+                        </div>
+                    </div>
+
+                    <div id="rackFields" style="display: none;">
+                        <div class="form-group">
+                            <label>Room <span class="manitory">*</span></label>
+                            <select class="select">
+                                <option value="">Select Room</option>
+                                <option>Room A</option>
+                                <option>Room B</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Rack Name <span class="manitory">*</span></label>
+                            <input type="text" class="form-control" placeholder="Enter rack name">
+                        </div>
+                    </div>
+
+                    <div id="levelFields" style="display: none;">
+                        <div class="form-group">
+                            <label>Room <span class="manitory">*</span></label>
+                            <select class="select" id="levelRoom">
+                                <option value="">Select Room</option>
+                                <option>Room A</option>
+                                <option>Room B</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Rack <span class="manitory">*</span></label>
+                            <select class="select" id="levelRack">
+                                <option value="">Select Rack</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Level Name <span class="manitory">*</span></label>
+                            <input type="text" class="form-control" placeholder="Enter level name">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-submit">Save Location</button>
+                    <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/feather.min.js"></script>
+    <script src="assets/js/jquery.slimscroll.min.js"></script>
+    <script src="assets/js/jquery.dataTables.min.js"></script>
+    <script src="assets/js/dataTables.bootstrap4.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/script.js"></script>
+
+    <!-- Location Management Scripts -->
+    <script>
+        $(document).ready(function() {
+            // Initialize DataTables
+            $('.datanew').DataTable();
+
+            // Location Type Change Handler
+            $('#locationType').on('change', function() {
+                let type = $(this).val();
+                $('.modal-body > div[id$="Fields"]').hide();
+                if (type) {
+                    $(`#${type}Fields`).show();
+                }
+            });
+
+            // Room Change Handler
+            $('#levelRoom').on('change', function() {
+                let room = $(this).val();
+                updateRackOptions(room);
+            });
+
+            function updateRackOptions(room) {
+                let $rackSelect = $('#levelRack');
+                $rackSelect.empty();
+                
+                if (room) {
+                    // This would be replaced with actual rack data for the selected room
+                    $rackSelect.append(`
+                        <option value="">Select Rack</option>
+                        <option>Rack 1</option>
+                        <option>Rack 2</option>
+                        <option>Rack 3</option>
+                    `);
+                } else {
+                    $rackSelect.append('<option value="">Select Room First</option>');
+                }
+            }
+
+            // Update location statistics
+            function updateLocationStats() {
+                // This would integrate with backend to get real statistics
+                $('#totalRooms').text('4');
+                $('#totalRacks').text('12');
+                $('#totalLevels').text('36');
+                $('#occupancyRate').text('75%');
+            }
+
+            // Initialize statistics
+            updateLocationStats();
+        });
+    </script>
+</body>
+</html>

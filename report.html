@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <meta name="description" content="Warehouse Management System">
+    <title>Report Management</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.jpg">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="assets/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div id="global-loader">
+        <div class="whirly-loader"></div>
+    </div>
+
+    <div class="main-wrapper">
+        <!-- Header & Sidebar code remains same -->
+
+        <div class="page-wrapper">
+            <div class="content">
+                <div class="page-header">
+                    <div class="page-title">
+                        <h4>Report Management</h4>
+                        <h6>View and generate reports</h6>
+                    </div>
+                </div>
+
+                <!-- Report Generation Form -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-3 col-sm-6">
+                                <div class="form-group">
+                                    <label>Report Type</label>
+                                    <select class="select" id="reportType">
+                                        <option value="">Select Report Type</option>
+                                        <option value="inventory">Inventory Status</option>
+                                        <option value="transaction">Transaction History</option>
+                                        <option value="location">Location Utilization</option>
+                                        <option value="alerts">Stock Alerts</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-sm-6">
+                                <div class="form-group">
+                                    <label>Date Range</label>
+                                    <div class="input-groupicon">
+                                        <input type="text" placeholder="From Date" class="datetimepicker">
+                                        <div class="addonset">
+                                            <img src="assets/img/icons/calendars.svg" alt="img">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-sm-6">
+                                <div class="form-group">
+                                    <label>&nbsp;</label>
+                                    <div class="input-groupicon">
+                                        <input type="text" placeholder="To Date" class="datetimepicker">
+                                        <div class="addonset">
+                                            <img src="assets/img/icons/calendars.svg" alt="img">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-sm-6">
+                                <div class="form-group">
+                                    <label>&nbsp;</label>
+                                    <button type="button" class="btn btn-primary w-100" id="generateReport">
+                                        Generate Report
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Report Preview Section -->
+                <div class="card" id="reportPreview">
+                    <!-- Inventory Status Report -->
+                    <div class="report-section" id="inventoryReport" style="display: none;">
+                        <div class="card-header">
+                            <h5>Inventory Status Report</h5>
+                            <div class="card-header-right">
+                                <button class="btn btn-primary" onclick="exportReport('inventory')">
+                                    <i class="fas fa-download"></i> Export
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table datanew">
+                                    <thead>
+                                        <tr>
+                                            <th>Item Code</th>
+                                            <th>Item Name</th>
+                                            <th>Category</th>
+                                            <th>Current Stock</th>
+                                            <th>Minimum Stock</th>
+                                            <th>Location</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Data will be populated dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Transaction History Report -->
+                    <div class="report-section" id="transactionReport" style="display: none;">
+                        <div class="card-header">
+                            <h5>Transaction History Report</h5>
+                            <div class="card-header-right">
+                                <button class="btn btn-primary" onclick="exportReport('transaction')">
+                                    <i class="fas fa-download"></i> Export
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table datanew">
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Transaction ID</th>
+                                            <th>Type</th>
+                                            <th>Item</th>
+                                            <th>Quantity</th>
+                                            <th>Location</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Data will be populated dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Location Utilization Report -->
+                    <div class="report-section" id="locationReport" style="display: none;">
+                        <div class="card-header">
+                            <h5>Location Utilization Report</h5>
+                            <div class="card-header-right">
+                                <button class="btn btn-primary" onclick="exportReport('location')">
+                                    <i class="fas fa-download"></i> Export
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div id="locationChart"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Location</th>
+                                                    <th>Total Capacity</th>
+                                                    <th>Used Space</th>
+                                                    <th>Utilization</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Data will be populated dynamically -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stock Alerts Report -->
+                    <div class="report-section" id="alertsReport" style="display: none;">
+                        <div class="card-header">
+                            <h5>Stock Alerts Report</h5>
+                            <div class="card-header-right">
+                                <button class="btn btn-primary" onclick="exportReport('alerts')">
+                                    <i class="fas fa-download"></i> Export
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table datanew">
+                                    <thead>
+                                        <tr>
+                                            <th>Item Code</th>
+                                            <th>Item Name</th>
+                                            <th>Current Stock</th>
+                                            <th>Minimum Stock</th>
+                                            <th>Status</th>
+                                            <th>Last Restocked</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Data will be populated dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/feather.min.js"></script>
+    <script src="assets/js/jquery.slimscroll.min.js"></script>
+    <script src="assets/js/jquery.dataTables.min.js"></script>
+    <script src="assets/js/dataTables.bootstrap4.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/plugins/apexchart/apexcharts.min.js"></script>
+    <script src="assets/js/script.js"></script>
+
+    <!-- Report Management Scripts -->
+    <script>
+        $(document).ready(function() {
+            // Initialize DataTables
+            $('.datanew').DataTable();
+
+            // Report Type Change Handler
+            $('#reportType').on('change', function() {
+                let type = $(this).val();
+                $('.report-section').hide();
+                if (type) {
+                    $(`#${type}Report`).show();
+                }
+            });
+
+            // Generate Report Handler
+            $('#generateReport').on('click', function() {
+                let type = $('#reportType').val();
+                if (type) {
+                    generateReport(type);
+                }
+            });
+        });
+
+        // Report Generation Function
+        function generateReport(type) {
+            // This would integrate with backend to fetch actual report data
+            switch(type) {
+                case 'inventory':
+                    generateInventoryReport();
+                    break;
+                case 'transaction':
+                    generateTransactionReport();
+                    break;
+                case 'location':
+                    generateLocationReport();
+                    break;
+                case 'alerts':
+                    generateAlertsReport();
+                    break;
+            }
+        }
+
+        // Export Report Function
+        function exportReport(type) {
+            // This would handle report export in various formats (PDF, Excel, etc.)
+            alert('Exporting ' + type + ' report...');
+        }
+
+        // Individual Report Generation Functions
+        function generateInventoryReport() {
+            // Sample data - would be replaced with actual API call
+            const data = [
+                {
+                    itemCode: 'IT001',
+                    name: 'Laptop Dell XPS 13',
+                    category: 'Electronics',
+                    currentStock: 24,
+                    minStock: 10,
+                    location: 'Room A - Rack 1',
+                    status: 'In Stock'
+                }
+            ];
+            
+            // Update table with data
+            updateReportTable('inventoryReport', data);
+        }
+
+        function generateTransactionReport() {
+            // Implementation for transaction report
+        }
+
+        function generateLocationReport() {
+            // Implementation for location report including chart
+            const options = {
+                series: [{
+                    name: 'Utilization',
+                    data: [75, 65, 45, 80]
+                }],
+                chart: {
+                    type: 'bar',
+                    height: 350
+                },
+                xaxis: {
+                    categories: ['Room A', 'Room B', 'Room C', 'Room D']
+                }
+            };
+
+            const chart = new ApexCharts(document.querySelector("#locationChart"), options);
+            chart.render();
+        }
+
+        function generateAlertsReport() {
+            // Implementation for alerts report
+        }
+
+        // Helper Functions
+        function updateReportTable(reportId, data) {
+            const table = $(`#${reportId} table`).DataTable();
+            table.clear();
+            table.rows.add(data);
+            table.draw();
+        }
+    </script>
+</body>
+</html>
